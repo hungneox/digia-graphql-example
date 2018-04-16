@@ -30,12 +30,13 @@ class MutationResolver extends AbstractResolver
      */
     public function resolveAddMessage($_, array $args)
     {
+        $messageInput = $args['message'];
         /** @noinspection PhpUndefinedMethodInspection */
-        $channel = Channel::find($args['channelId']);
+        $channel = Channel::find($messageInput['channelId']);
 
         /** @noinspection PhpUndefinedMethodInspection */
-        $message = $channel->message()->create([
-            'message' => $args['message'],
+        $message = $channel->messages()->create([
+            'text' => $messageInput['text'],
         ]);
 
         return $message;

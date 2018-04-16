@@ -1,6 +1,7 @@
 <?php
 
 namespace App\GraphQL;
+
 use App\Models\Channel;
 
 /**
@@ -14,7 +15,7 @@ class QueryResolver extends AbstractResolver
      */
     public function resolveChannels()
     {
-        return Channel::all()->toArray();
+        return Channel::with('messages')->get()->toArray();
     }
 
     /**
@@ -24,6 +25,9 @@ class QueryResolver extends AbstractResolver
      */
     public function resolveChannel($_, array $args)
     {
-        return  Channel::find($args['id'])->toArray();
+        /** @var Channel $channel */
+        $channel = Channel::with('messages')->find($args['id']);
+
+        return $channel->toArray();
     }
 }
