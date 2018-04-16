@@ -31,6 +31,7 @@ class GraphQLServiceProvider extends ServiceProvider
         $this->app->singleton(GraphQLService::class, function () use ($config) {
             $schema = buildSchema(file_get_contents(__DIR__ . '/schema.graphqls'), [
                 'Query' => QueryResolver::class,
+                'Mutation' => MutationResolver::class
             ]);
 
             return new GraphQLService($schema, $config);

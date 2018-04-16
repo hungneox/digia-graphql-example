@@ -6,7 +6,7 @@ namespace App\GraphQL;
  * Class QueryResolver
  * @package App\GraphQL
  */
-class Resolvers extends AbstractResolver
+class QueryResolver extends AbstractResolver
 {
     protected static $channels = [
         [
