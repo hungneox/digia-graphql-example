@@ -2,8 +2,15 @@
 
 namespace App\GraphQL;
 
+/**
+ * Class QueryResolver
+ * @package App\GraphQL
+ */
 class QueryResolver extends AbstractResolver
 {
+    /**
+     * @return array
+     */
     public function resolveChannels()
     {
         return [
@@ -36,5 +43,15 @@ class QueryResolver extends AbstractResolver
                 ]
             ],
         ];
+    }
+
+    /**
+     * @param $_
+     * @param array $args
+     * @return array
+     */
+    public function resolveChannel($_, array $args)
+    {
+        return  collect($this->resolveChannels())->firstWhere('id', $args['id']);
     }
 }
